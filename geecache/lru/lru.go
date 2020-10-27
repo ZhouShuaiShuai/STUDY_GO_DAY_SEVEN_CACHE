@@ -58,6 +58,10 @@ c.ll.MoveToFront(ele)，即将链表中的节点 ele 移动到队尾（双向链
 
 //* 号用于指定变量是作为一个指针
 func (c *Cache) Get(key string) (value Value, ok bool) {
+
+	ele, ok := c.cache[key]
+	fmt.Println("ele : ", ele)
+	fmt.Println("ok : ", ok)
 	if ele, ok := c.cache[key]; ok {
 		c.ll.MoveToFront(ele)
 		kv := ele.Value.(*entry)
@@ -96,7 +100,8 @@ func (c *Cache) RemoveOldest() {
 更新 c.nbytes，如果超过了设定的最大值 c.maxBytes，则移除最少访问的节点。
 */
 func (c *Cache) Add(key string, value Value) {
-	fmt.Println("ADD FUNC")
+	fmt.Printf("ADD FUNC %s  %s", key, value)
+	fmt.Println()
 	if ele, ok := c.cache[key]; ok {
 		c.ll.MoveToFront(ele)
 		kv := ele.Value.(*entry)
